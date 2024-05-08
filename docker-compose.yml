@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: looking_for_talents_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
