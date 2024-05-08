@@ -1,9 +1,17 @@
-version: '2'
+version: '3'
 
 services:
-  rabbitmq:
-    image: rabbitmq:management
-    container_name: looking_for_talents_rabbitmq
+  app:
+    build: .
+    volumes:
+      - .:/app
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - 8080:8080
+    env_file:
+      - .env
+    networks:
+        - looking_for_talents
+
+networks:
+  looking_for_talents:
+    external: true
