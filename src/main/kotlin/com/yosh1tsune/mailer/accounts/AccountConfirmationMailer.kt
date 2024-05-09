@@ -19,10 +19,7 @@ public class AccountConfirmationMailer(val payload: JSONObject) {
     val client = OkHttpClient().newBuilder().build()
 
     fun deliver() {
-      println(MailerConstants.URL)
-      println(MailerConstants.TOKEN)
       val result = client.newCall(request()).execute();
-      println(result)
     }
 
     fun request() : Request {
