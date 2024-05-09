@@ -1,0 +1,3 @@
+mailtrap:
+  url: ${MAILER_SERVICE_URL}
+  token: ${MAILER_SERVICE_TOKEN}

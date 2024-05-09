@@ -1,27 +1,35 @@
 package com.yosh1tsune.mailer.accounts
 
 import org.json.JSONObject
+import org.springframework.beans.factory.annotation.Value
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.RequestBody
 
+object MailerConstants {
+  val URL: String = @Value("\${mailtrap.url}");
+  val TOKEN: String = @Value("\${mailtrap.token}");
+  const val SUBJECT = "E-mail de confirmação de conta."
+  const val MEDIA_TYPE = "application/json"
+}
+
 public class AccountConfirmationMailer(val payload: JSONObject) {
-    val URL = "https://send.api.mailtrap.io/api/send"
-    val SUBJECT = "E-mail de confirmação de conta."
-    val MEDIA_TYPE = "application/json"
     val client = OkHttpClient().newBuilder().build()
 
     fun deliver() {
-      client.newCall(request()).execute();
+      println(MailerConstants.URL)
+      println(MailerConstants.TOKEN)
+      val result = client.newCall(request()).execute();
+      println(result)
     }
 
     fun request() : Request {
       return Request.Builder()
-        .url(URL)
-        .method("POST", body().toRequestBody(MEDIA_TYPE.toMediaType()))
-        .addHeader("Authorization", "Bearer a5670b1b971f32fb8882a68271733bc4")
+        .url(MailerConstants.URL)
+        .method("POST", body().toRequestBody(MailerConstants.MEDIA_TYPE.toMediaType()))
+        .addHeader("Authorization", MailerConstants.TOKEN)
         .addHeader("Content-Type", "application/json")
         .build();
     }
@@ -34,7 +42,7 @@ public class AccountConfirmationMailer(val payload: JSONObject) {
               "name": "Mailtrap Test"
             },
             "to": [{ "email": "${payload.get("email")}" }],
-            "subject": "${SUBJECT}",
+            "subject": "${MailerConstants.SUBJECT}",
             "text": "${payload.get("confirmation_url")}",
             "category": "Confirmação de Conta"
           }
