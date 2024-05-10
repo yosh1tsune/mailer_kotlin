@@ -5,7 +5,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener
 import org.springframework.stereotype.Service
 import org.json.JSONObject
 
-import com.yosh1tsune.mailer.accounts.AccountConfirmationMailer
+import com.yosh1tsune.mailer.mailers.accounts.AccountConfirmationMailer
 
 @Service
 @RabbitListener(queues = ["accounts.confirmation"])
