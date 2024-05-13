@@ -8,8 +8,8 @@ import okhttp3.RequestBody
 
 class MailerRequestsService(val body: String) {
   val CLIENT = OkHttpClient().newBuilder().build()
-  val URL: String = "https://send.api.mailtrap.io/api/send";
-  val TOKEN: String = "Bearer a5670b1b971f32fb8882a68271733bc4";
+  val URL: String = System.getenv("MAILER_SERVICE_URL");
+  val TOKEN: String = System.getenv("MAILER_SERVICE_TOKEN");
   val MEDIA_TYPE = "application/json"
 
   fun call() {

@@ -1,3 +1,5 @@
 mailtrap:
   url: ${MAILER_SERVICE_URL}
   token: ${MAILER_SERVICE_TOKEN}
+  templates:
+    account_confirmation: ${MAILER_ACCOUNT_CONFIRMATION_TEMPLATE}

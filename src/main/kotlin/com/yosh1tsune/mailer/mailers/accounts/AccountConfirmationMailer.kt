@@ -6,7 +6,7 @@ import com.yosh1tsune.mailer.services.requests.MailerRequestsService
 
 public class AccountConfirmationMailer(val payload: JSONObject) {
     val SUBJECT = "E-mail de confirmação de conta."
-    val TEMPLATE_UUID = "8ef0f5cd-4bf1-4733-baf3-eb4d085e5617"
+    val TEMPLATE_UUID = System.getenv("MAILER_ACCOUNT_CONFIRMATION_TEMPLATE")
 
     fun deliver() {
       MailerRequestsService(body()).call()
